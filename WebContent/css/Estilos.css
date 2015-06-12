@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+
+body{
+	
+	background: lightyellow;
+}
+
+h2{
+	margin-bottom: 5%;
+	margin-left: 35%;
+	
+}
+
+form{
+	margin-left: 30%;
+	
+}
