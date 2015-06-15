@@ -12,6 +12,8 @@ import es.banco.entity.TarjetaCredito;
 import es.banco.persistence.dao.TarjetaCreditoDao;
 
 
+
+
 public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 
 	private Connection cx;
@@ -25,99 +27,101 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 	@Override
 	public void create(TarjetaCredito tarjeta) {
 		try {
+			
 			abrirConexion();
-		try{
-			PreparedStatement ps =
-					cx.prepareStatement ("INSERT INTO TARJETACREDITO VALUES(?,?,?,?,?,?,?,?)");
-			ps.setInt(1, 0);
-			ps.setString(2, tarjeta.getNumero() );
-			ps.setInt(3, tarjeta.getCupoMaximo());
-			ps.setInt(4, tarjeta.getCupoDisponible());
-			ps.setString(5, tarjeta.getTipo());
-			ps.setInt(6, tarjeta.getNumeroComprobacion());
-			ps.setInt(7, tarjeta.getContraseña());
-			ps.setBoolean(8, tarjeta.isBloqueada());
 			
-			ps.executeUpdate();
-			
-			cx.commit();
-			
-			}catch(SQLException e){
-				try{
-				cx.rollback();
+			try {
+				PreparedStatement ps = 
+						cx.prepareStatement("INSERT INTO tarjetacredito VALUES(?,?,?,?,?,?,?,?)");
 				
-			}
-			
-		 catch (Exception e1) {
-			
-			e.printStackTrace();
-			
-		}
+				ps.setInt(1, 0);
+				ps.setString(2, tarjeta.getNumero());
+				ps.setLong(3, tarjeta.getCupoMaximo());
+				ps.setLong(4, tarjeta.getCupoDisponible());
+				ps.setString(5, tarjeta.getTipo());
+				ps.setInt(6, tarjeta.getNumeroComprobacion());
+				ps.setInt(7,tarjeta.getContraseña());
+				ps.setBoolean(8,tarjeta.isBloqueada());
+				
+				
+				ps.executeUpdate();
+				
+				
+				
+				cx.commit();
+			} catch (SQLException e) {
+				try {
+					cx.rollback();
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-				
-		finally {
+		
+		
+		
+		finally{
 			cerrarConexion();
 		}
-			
+		
 	}
-
+		
 	@Override
-	public ArrayList <TarjetaCredito> findAll(){
-		ArrayList <TarjetaCredito> tarjeta = new ArrayList<TarjetaCredito>();
-	try{
-		abrirConexion();
-		PreparedStatement ps = cx.prepareStatement("SELECT * FROM CLIENTE");
-		ResultSet consulta = ps.executeQuery();
-		
-
-		while (consulta.next()){
-			TarjetaCredito tarjetaNueva = new TarjetaCredito();
-			TarjetaCredito tarjetaCredito = null;
+	public ArrayList<TarjetaCredito> findAll11() {
+		ArrayList<TarjetaCredito> clientes = new ArrayList<TarjetaCredito>();
+			try {
+				
+					abrirConexion();
+				
+					PreparedStatement ps = cx.prepareStatement("SELECT * FROM TARJETACREDITO");
+				
+					ResultSet consulta = ps.executeQuery();
+					
+					
+					while (consulta.next()){
+						TarjetaCredito  TarjetaCredito = new TarjetaCredito();
+						
+						TarjetaCredito.setId(consulta.getInt("id"));
+						TarjetaCredito.setNumero(consulta.getString("numero"));
+						TarjetaCredito.setCupoMaximo(consulta.getInt("cupoMaximo"));
+						TarjetaCredito.setCupoDisponible(consulta.getInt("cupoDisponible"));
+						TarjetaCredito.setTipo(consulta.getString("tipo"));
+						TarjetaCredito.setNumeroComprobacion(consulta.getInt("numeroComprobacion"));
+						TarjetaCredito.setContraseña(consulta.getInt("contraseña"));
+						TarjetaCredito.setBloqueada(consulta.getBoolean("bloqueada"));
+						TarjetaCredito.add(TarjetaCredito);
+						
+					}				
+					
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 			
-			tarjetaCredito.setId(consulta.getInt("id"));
 			
-			tarjetaCredito.setNumero(consulta.getString("numero"));
-			tarjetaCredito.setCupoMaximo(consulta.getInt("cupoMaximo"));
-			tarjetaCredito.setCupoDisponible(consulta.getInt("cupoDisponible"));
-			tarjetaCredito.setTipo(consulta.getString("tipo"));
-			tarjetaCredito.setNumeroComprobacion(consulta.getInt("numeroComprobacion"));
-			tarjetaCredito.setContraseña(consulta.getInt("contraseña"));
-			tarjetaCredito.setBloqueada(consulta.getBoolean("bloqueada"));
-			
-			
-			tarjeta.add(tarjetaCredito);
-			
-		}				
-		
-} catch (SQLException e) {
+			finally{
+				cerrarConexion();
+			}
+	return clientes;
 	
-	e.printStackTrace();
-}
-
-//4.Cerrar la conexión
-finally{
-	cerrarConexion();
-}
-return tarjeta;
-
-}
-
-
+	}
+	
+	
 	private void abrirConexion(){
 		try {
-			//1.Determinar y validar si tengo el driver o conector (de mysql)
+			
 			Class.forName("com.mysql.jdbc.Driver");
-			//2.Establecer la conexión...
+			
 			cx = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/Banco",
 					"rootTienda",
 					"rootTienda");
-			//3.Iniciar el autoComit en false para gestionar transacciones.
+			
 			cx.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			
@@ -131,7 +135,7 @@ return tarjeta;
 	private void cerrarConexion(){
 		try {
 			if(cx != null)
-			cx.close();
+				cx.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -139,51 +143,221 @@ return tarjeta;
 		}
 		
 	}
-
-
-
-
-private void cerrarConexion1() {
-	// TODO Auto-generated method stub
+	
+	
+	@Override
+	public ArrayList<TarjetaCredito> searchByName1(String name) {
+		ArrayList<TarjetaCredito> tarjeta= new ArrayList<TarjetaCredito>();
+		
+		try {
+			
+			
+			abrirConexion();
+			
+			
+			PreparedStatement ps = cx
+					.prepareStatement("SELECT * FROM TARJETACREDITO WHERE NUMERO LIKE ?");
+			
+			
+			ps.setString(1, "%"+ name + "%");
+			
+			
+			ResultSet resultado = ps.executeQuery();
+			
+			
+			while(resultado.next()){
+				TarjetaCredito c = new TarjetaCredito();
+				c.setId(resultado.getInt("id"));
+				c.setNumero(resultado.getString("numero"));
+				c.setCupoMaximo(resultado.getInt("cupoMaximo"));
+				c.setCupoDisponible(resultado.getInt("cupoDisponible"));
+				c.setTipo(resultado.getString("tipo"));
+				c.setNumeroComprobacion(resultado.getInt("numeroComprobacion"));
+				c.setContraseña(resultado.getInt("contraseña"));
+				c.setBloqueada(resultado.getBoolean("bloqueada"));
+				
+				
+				TarjetaCredito.add(c);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			
+			cerrarConexion();
+			
+		}
+		
+		
+		
+		return tarjeta;
+	}
+	
+	@Override
+	public void update1(TarjetaCredito tarjeta) {
+		try {
+			
+			
+			abrirConexion();
+			
+			
+			PreparedStatement ps = cx.prepareStatement(
+					"UPDATE TARJETACREDITO SET NUMERO = ?, CUPOMAXIMO = ?, CUPODISPONIBLE = ?, TIPO = ?, NUMEROCOMPROBACION = ?, CONTRASEÑA = ?, BLOQUEADA = ?  WHERE ID = ?");
+			
+			
+			ps.setString(1, tarjeta.getNumero());
+			ps.setInt(2, tarjeta.getCupoMaximo());
+			ps.setInt(3, tarjeta.getCupoDisponible());
+			ps.setString(4, tarjeta.getTipo());
+			ps.setInt(5, tarjeta.getNumeroComprobacion());
+			ps.setInt(6,tarjeta.getContraseña());
+			ps.setBoolean(7, tarjeta.isBloqueada());
+			
+			
+			ps.executeUpdate();
+			
+			
+			cx.commit();
+			
+		} catch (SQLException e) {
+			try {
+				cx.rollback();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally{
+			
+			cerrarConexion();
+		}
+		
+	}
+	
+	@Override
+	public void delete1(Integer id) {
+		try {
+			
+			abrirConexion();
+			
+			PreparedStatement ps = cx.prepareStatement("DELETE FROM TARJETACREDITO WHERE ID = ?");
+			
+			ps.setInt(1, id);
+			
+			ps.executeUpdate();
+			
+			cx.commit();
+			
+		} catch (SQLException e) {
+			try {
+				cx.rollback();
+			} catch (SQLException e1) {
+				
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally{
+			
+			
+			cerrarConexion();
+			
+		}
+		
+	}
+	
+	
+	
+	@Override
+	public ArrayList<TarjetaCredito> findAll1() {
+		
+		return null;
+	}
+	
+	@Override
+	public ArrayList<TarjetaCredito> searchByName(String name) {
+		
+		return null;
+	}
+	
+	@Override
+	public void update(TarjetaCredito tarjeta) {
+		
+		
+	}
+	
+	@Override
+	public void delete(Integer id) {
+		
+		
+	}
+	
+	@Override
+	public void read(Object id) {
+		
+		
+	}
+	
+	@Override
+	public ArrayList<TarjetaCredito> findAll() {
+		
+		return null;
+	}
 	
 }
-
-private void abrirConexion1() {
-	// TODO Auto-generated method stub
 	
-}
-
-@Override
-public ArrayList<TarjetaCredito> findAll1() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<TarjetaCredito> searchByName(String name) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public void update(TarjetaCredito cliente) {
-	// TODO Auto-generated method stub
 	
-}
-
-@Override
-public void delete(Integer id) {
-	// TODO Auto-generated method stub
 	
-}
-
-@Override
-public void read(Object id) {
-	// TODO Auto-generated method stub
 	
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
 
-}
 		
 		
 		

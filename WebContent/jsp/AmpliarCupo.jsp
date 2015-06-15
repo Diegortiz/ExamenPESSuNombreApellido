@@ -10,14 +10,31 @@
 <body>
 	<h2>Ampliar el cupo disponible</h2>
 	<form action = "/ExamenPESSuNombreApellido/Banco/AmpliarCupo" method = "post" enctype ="text/html">
-		<labe>Cantidad: </labe>
+		
+		<label>Número de la tarjeta: </label>
+		<input type = "text" name = "numero" id="Numero" value="" required ="required"/>
+		<br/><br/><br/><br/>
+		
+		<label>Número de comprobación: </label>
+		<input type = "text" name = "numeroComprobacion" id="NumeroComprobacion" value="" required ="required"/>
+		<br/><br/><br/><br/>
+		
+		<label>Contraseña: </label>
+		<input type = "text" name = "contraseña" id="Contraseña" value="" required ="required"/>
+		<br/><br/><br/><br/>
+		
+	
+		<label>Cantidad: </label>
 		<input type = "text" name = "cantidad" id="Cantidad" value="" required ="required"/>
 		<br/><br/><br/><br/>
+		
+	
 
 	<input type="submit" id="enviar" name="enviar" value="Enviar"/>
 		<input type="reset" id="borrar" name="borrar" value="Borrar"/>
 
 	
-
+	</form>
+	
 </body>
 </html>

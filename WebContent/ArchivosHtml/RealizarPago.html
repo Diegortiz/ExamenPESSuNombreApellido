@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Efectuar pago</title>
+<link rel = "stylesheet" href="../css/Estilos.css"/>
+</head>
+
+<body>
+	<h2>Efectuar pago</h2>
+	
+	<form action="/ExamenPESSuNombre/Banco/RealizarPago" method ="post" enctype = "text/html">
+	<label>Número de la tarjeta: </label>
+		<input type = "text" name="numero" id="Numero" value="" required="required"/>
+		<br/><br/><br/><br/>
+		
+	<label>Contraseña: </label>
+		<input type = "text" name = "contraseña" id = "Contraseña" value="" required="required"/>
+		<br/><br/><br/><br/>
+		
+	<label>Número de comprobación: </label>
+		<input type = "text" name="numeroComprobacion" id = "NumeroComprobacion" value="" required = "required"/>
+		<br/><br/><br/><br/>
+		
+	<label>Cantidad a pagar: </label>
+		<input type = "text" name = "cantidadPagar" id = "CantidadPagar" value = "" required = "required"/>
+		<br/><br/><br/><br/>
+		
+	<input type = "submit" name = "enviar" id = "Enviar" value="Enviar"/>
+	<input type = "reset" name = "borrar" id = "Borrar" value ="Borrar"/>
+	
+	
+	
+	</form>
+
+</body>
+
+</html>

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>Dar de alta tarjeta</h2>
-	<form action = "/ExamenPESSuNombreApellido/Banco/DarAltaTarjeta" method = "post" enctype ="text/html">
+	<form action = " /ExamenPESSuNombreApellido/Banco/DarAltaTarjeta" method = "post" enctype ="text/html">
 		<labe>Número:</labe>
 		<input type = "text" name = "numero" id="Numero" value="" required ="required"/>
 		<br/><br/><br/><br/>
@@ -22,10 +22,11 @@
 		<input type= "text" name = "cupoDisponible" id="CupoDisponible" value="" required = "required"/>
 		<br/><br/><br/><br/>
 		
+		<label>Tipo: </label>
 		<label>Visa: </label>
-		<input type = "checkbox" name = "visa" id="Visa" value ="" required ="required"/>
-		<label>Mastercard: </label>
-		<input type = "checkbox" name="mastercard" id="Mastercard" value="" required = "required"/>
+		<input type = "radio" name = "tipo" id="Visa" value ="Visa" checked = "checked"/>
+		<label>Mastercard:</label>
+		<input type = "radio" name="tipo" id="Mastercard" value="Mastercard"/>
 		<br/><br/><br/><br/>
 		
 		<label>Número comprobación: </label>
@@ -37,7 +38,8 @@
 		<br/><br/><br/><br/>
 		
 		<label>Bloqueada: </label>
-		<input type="radio" name= "bloqueada" id="Bloqueada" value="" required="required" />
+		<input type="radio" name= "bloqueada" id="Bloqueada" value="si" checked="checked"/>Sí
+		<input type="radio" name= "bloqueada" id="Bloqueada" value="no"/>No
 		<br/><br/><br/><br/>
 		
 		<input type="submit" id="enviar" name="enviar" value="Enviar"/>

@@ -16,6 +16,10 @@ public class TarjetaCredito {
 	}
 
 
+	
+
+
+
 	public TarjetaCredito(int id, String numero, int cupoMaximo,
 			int cupoDisponible, String tipo, int numeroComprobacion,
 			int contraseña, boolean bloqueada) {
@@ -31,11 +35,8 @@ public class TarjetaCredito {
 	}
 
 
-	public TarjetaCredito(int i, String numero2, String cupoMaximo2,
-			String cupoDisponible2, String tipo2, String tipo22,
-			String numeroComprobacion2, String contraseña2, String bloqueada2) {
-		
-	}
+
+
 
 
 	public int getId() {
@@ -176,6 +177,12 @@ public class TarjetaCredito {
 		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
+	}
+
+
+	public static void add(TarjetaCredito c) {
+		
+		
 	}
 	
 	

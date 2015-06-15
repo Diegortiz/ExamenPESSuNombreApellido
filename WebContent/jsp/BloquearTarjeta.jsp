@@ -13,7 +13,7 @@
 	<form action="/ExamenPESSunombreApellido/Banco/BloquearTarjeta" method="post" enctype="text/html">
 	
 	
-		<labe>Número:</labe>
+		<labe>Número de la tarjeta:</labe>
 		<input type = "text" name = "numero" id="Numero" value="" required ="required"/>
 		<br/><br/><br/><br/>
 	

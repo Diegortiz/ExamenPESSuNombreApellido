@@ -12,14 +12,22 @@ public interface TarjetaCreditoDao {
 	public ArrayList <TarjetaCredito> findAll();
 	
 	public ArrayList<TarjetaCredito> searchByName(String name);
-	
-	public void update(TarjetaCredito cliente);
-	
-	public void delete(Integer id);
 
 	public void read(Object id);
 
 	ArrayList<TarjetaCredito> findAll1();
+
+	ArrayList<TarjetaCredito> searchByName1(String name);
+
+	public void update1(TarjetaCredito tarjeta);
+
+	public void delete1(Integer id);
+
+	 public void delete(Integer id);
+
+	public void update(TarjetaCredito tarjeta);
+
+	ArrayList<TarjetaCredito> findAll11();
 	
 	
 }
