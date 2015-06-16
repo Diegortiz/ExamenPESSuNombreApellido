@@ -7,27 +7,17 @@ import es.banco.entity.TarjetaCredito;
 
 public interface TarjetaCreditoDao {
 
-	public void create (TarjetaCredito tarjeta);
-	
-	public ArrayList <TarjetaCredito> findAll();
-	
-	public ArrayList<TarjetaCredito> searchByName(String name);
+	public void create(TarjetaCredito tarjeta);
 
-	public void read(Object id);
+	ArrayList<TarjetaCredito> findAll();
 
-	ArrayList<TarjetaCredito> findAll1();
-
-	ArrayList<TarjetaCredito> searchByName1(String name);
-
-	public void update1(TarjetaCredito tarjeta);
-
-	public void delete1(Integer id);
-
-	 public void delete(Integer id);
+	ArrayList<TarjetaCredito> searchByName(String name);
 
 	public void update(TarjetaCredito tarjeta);
 
-	ArrayList<TarjetaCredito> findAll11();
+	public void delete(Integer id);
 	
-	
+	public void read(TarjetaCredito tarjeta);
+
+
 }

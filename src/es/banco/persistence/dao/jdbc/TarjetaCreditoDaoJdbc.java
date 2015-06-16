@@ -72,8 +72,8 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 	}
 		
 	@Override
-	public ArrayList<TarjetaCredito> findAll11() {
-		ArrayList<TarjetaCredito> clientes = new ArrayList<TarjetaCredito>();
+	public ArrayList<TarjetaCredito> findAll() {
+		ArrayList<TarjetaCredito> tarjeta = new ArrayList<TarjetaCredito>();
 			try {
 				
 					abrirConexion();
@@ -84,17 +84,17 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 					
 					
 					while (consulta.next()){
-						TarjetaCredito  TarjetaCredito = new TarjetaCredito();
+						TarjetaCredito  tarjetaCredito = new TarjetaCredito();
 						
-						TarjetaCredito.setId(consulta.getInt("id"));
-						TarjetaCredito.setNumero(consulta.getString("numero"));
-						TarjetaCredito.setCupoMaximo(consulta.getInt("cupoMaximo"));
-						TarjetaCredito.setCupoDisponible(consulta.getInt("cupoDisponible"));
-						TarjetaCredito.setTipo(consulta.getString("tipo"));
-						TarjetaCredito.setNumeroComprobacion(consulta.getInt("numeroComprobacion"));
-						TarjetaCredito.setContraseña(consulta.getInt("contraseña"));
-						TarjetaCredito.setBloqueada(consulta.getBoolean("bloqueada"));
-						TarjetaCredito.add(TarjetaCredito);
+						tarjetaCredito.setId(consulta.getInt("id"));
+						tarjetaCredito.setNumero(consulta.getString("numero"));
+						tarjetaCredito.setCupoMaximo(consulta.getInt("cupoMaximo"));
+						tarjetaCredito.setCupoDisponible(consulta.getInt("cupoDisponible"));
+						tarjetaCredito.setTipo(consulta.getString("tipo"));
+						tarjetaCredito.setNumeroComprobacion(consulta.getInt("numeroComprobacion"));
+						tarjetaCredito.setContraseña(consulta.getInt("contraseña"));
+						tarjetaCredito.setBloqueada(consulta.getBoolean("bloqueada"));
+						tarjeta.add(tarjetaCredito);
 						
 					}				
 					
@@ -107,7 +107,7 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 			finally{
 				cerrarConexion();
 			}
-	return clientes;
+	return tarjeta;
 	
 	}
 	
@@ -146,7 +146,7 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 	
 	
 	@Override
-	public ArrayList<TarjetaCredito> searchByName1(String name) {
+	public ArrayList<TarjetaCredito> searchByName(String name) {
 		ArrayList<TarjetaCredito> tarjeta= new ArrayList<TarjetaCredito>();
 		
 		try {
@@ -195,7 +195,7 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 	}
 	
 	@Override
-	public void update1(TarjetaCredito tarjeta) {
+	public void update(TarjetaCredito tarjeta) {
 		try {
 			
 			
@@ -236,7 +236,7 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 	}
 	
 	@Override
-	public void delete1(Integer id) {
+	public void delete(Integer id) {
 		try {
 			
 			abrirConexion();
@@ -265,44 +265,18 @@ public class TarjetaCreditoDaoJdbc implements TarjetaCreditoDao{
 		}
 		
 	}
-	
-	
-	
+
 	@Override
-	public ArrayList<TarjetaCredito> findAll1() {
-		
-		return null;
-	}
-	
-	@Override
-	public ArrayList<TarjetaCredito> searchByName(String name) {
-		
-		return null;
-	}
-	
-	@Override
-	public void update(TarjetaCredito tarjeta) {
+	public void read(TarjetaCredito tarjeta) {
 		
 		
 	}
+
 	
-	@Override
-	public void delete(Integer id) {
-		
-		
-	}
 	
-	@Override
-	public void read(Object id) {
-		
-		
-	}
 	
-	@Override
-	public ArrayList<TarjetaCredito> findAll() {
-		
-		return null;
-	}
+	
+	
 	
 }
 	

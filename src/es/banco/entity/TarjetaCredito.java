@@ -38,7 +38,6 @@ public class TarjetaCredito {
 
 
 
-
 	public int getId() {
 		return id;
 	}

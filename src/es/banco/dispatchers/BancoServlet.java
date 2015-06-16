@@ -1,6 +1,7 @@
 package es.banco.dispatchers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -11,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.banco.controller.ejb.AmpliarCupoControllerEjb;
+import es.banco.controller.ejb.AmpliarCupoTarjetaControllerEjb;
+import es.banco.controller.ejb.BloquearTarjetaControllerEjb;
 import es.banco.controller.ejb.DarAltaTarjetaEjb;
 import es.banco.controller1.AmpliarCupoController;
 import es.banco.entity.TarjetaCredito;
+
+
 
 
 /**
@@ -60,6 +65,17 @@ public class BancoServlet extends HttpServlet {
 				rd.forward(request, response);
 			break;
 			
+			case "AmpliarCupoTarjeta": 
+				
+			AmpliarCupoTarjetaControllerEjb todos = new AmpliarCupoTarjetaControllerEjb();
+			ArrayList<TarjetaCredito> tarjeta = todos.ampliarCupoTarjeta();
+			request.setAttribute("AmpliarCupoTarjeta", tarjeta);
+//			todos.ampliarCupoTarjeta();
+			titulo="Listado de tarjetas";
+			request.setAttribute("titulo", titulo);
+			rd = request.getRequestDispatcher("/jsp/AmpliarCupoTarjeta.jsp");
+			rd.forward(request,  response);
+			break;
 			
 			case "AmpliarCupo":
 				rd = request.getRequestDispatcher("/jsp/AmpliarCupo.jsp");
@@ -114,7 +130,14 @@ public class BancoServlet extends HttpServlet {
 		
 		
 		case "BloquearTarjeta":
+			int id = Integer.parseInt(request.getParameter("id"));
 			
+			BloquearTarjetaControllerEjb buscarEjb = new BloquearTarjetaControllerEjb();
+			buscarEjb.bloquear(id);
+			
+			
+			
+			response.sendRedirect("/ExamenPESSuNombreApellido/Banco/BloquearTarjeta");
 			
 			
 			break;

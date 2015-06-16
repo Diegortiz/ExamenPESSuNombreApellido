@@ -11,4 +11,9 @@ public class BloquearTarjetaControllerEjb implements BloquearTarjetaController{
 		
 	}
 
+	public void bloquear(int id) {
+		
+		
+	}
+
 }
