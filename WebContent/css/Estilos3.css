@@ -13,6 +13,9 @@ h2{
 	
 }
 
+	
+	
+}
 
 table{
 	
@@ -25,13 +28,31 @@ tr{
 	border:0.1em solid black;
 }
 
-td{
+  
+td {
 	background: #ffff00;
 	border: 0.1em solid black;
 	padding: 0.3em;
+	
+	
 }
 
-th{
-	background: #ff8040;
+
+ th{
+	background: #408080;
+	border: 0.1em solid black;
 	padding: 0.5em;
+	
+		
 }
+
+	
+	
+	
+	
+
+
+
+
+
+

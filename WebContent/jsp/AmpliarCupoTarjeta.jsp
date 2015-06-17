@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="../css/Estilos3.css">
 		
 		<script type = "text/javascript">
-			function actualizar(boton){
-				var formulario1 = document.getElementById("formulario1" + boton.name.substring(8));
+			function enviar(boton){
+				var formulario1 = document.getElementById("formulario1" + boton.name.substring(3));
 				if(boton.value =="Ampliar cupo")
 					formulario1.action = 
 						"${pageContext.request.contextPath}/Banco/AmpliarCupo";
@@ -65,11 +65,11 @@
 				value = "Ampliar cupo" name = "btn2<%= c.getId()%>"
 				 onclick ="enviar(this);"/></td>
 				 
-				<td><input type= "submit" id ="OtroBtn2"
+				<td><input type= "submit" id ="OtroBtn"
 				value="Bloquear tarjeta" name = "btn3<%=c.getId() %>"
 				onclick ="enviar(this);"/></td>
 			
-				<td><input type = "submit" id = "OtroBtn3"
+				<td><input type = "submit" id = "OtroBtn"
 				value = "Efectuar pago" name="btn4<%=c.getId() %>"
 				onclick = "enviar(this);"/></td>
 				
